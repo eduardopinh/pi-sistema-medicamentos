@@ -1,45 +1,39 @@
-// Importação dos pacotes
-// Instância para o Express
-const express = require('express');
-const session = require('express-session');
-const path = require('path');
+// Importações
+require("dotenv").config();
+const express = require("express");
+const session = require("express-session");
+const path = require("path");
 
 // Rotas
-const loginRoutes = require("./routes/login")
+const loginRoutes = require("./routes/login");
+const usuariosRoutes = require("./routes/usuarios");
 
-
+// Inicialização do app
 const app = express();
-const PORT = process.env.PORT || 3000;
 
+// Configuração da View Engine
+app.set("view engine", "ejs");
+app.set("views", path.join(__dirname, "views"));
 
-// view engine
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-// Configurações
+// Middlewares globais
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(session({
-    secret: 'troque-por-uma-chave-secreta',
-    resave: false,  
+    secret: process.env.SESSION_SECRET || "troque-por-uma-chave-secreta",
+    resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 1000 * 60 * 60 }
+    cookie: { 
+        maxAge: 1000 * 60 * 60, // 1 hora
+    }
 }));
 
-// Servir arquivos estáticos
-app.use(express.static(path.join(__dirname, 'public')));
+// Arquivos estáticos
+app.use(express.static(path.join(__dirname, "public")));
 
-// Confguração dos middlewares
-
-// Importação das rotas
+// Usando as Rotas
 app.use("/", loginRoutes);
+app.use("/usuarios", usuariosRoutes);
 
-// Exemplo de próximas rotas:
-// app.use("/", userRoutes);
-
-
-// Execução do servidor
-
-// Exportando o app para o server.js
+// Exportação (server.js inicia)
 module.exports = app;
