@@ -9,16 +9,12 @@ const usuariosRoutes = require("./routes/usuariosRoutes");
 
 const app = express();
 
-// ======================================
 // Middlewares Globais
-// ======================================
 app.use(cors()); // permite acesso do front
 app.use(express.json()); // aceita JSON
 app.use(express.urlencoded({ extended: true })); // aceita forms (opcional)
 
-// ======================================
 // Rotas da API
-// ======================================
 app.use("/auth", authRoutes);
 app.use("/usuarios", usuariosRoutes);
 

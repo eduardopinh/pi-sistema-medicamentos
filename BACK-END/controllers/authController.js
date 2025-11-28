@@ -6,9 +6,7 @@ const jwt = require("jsonwebtoken");
 
 module.exports = {
 
-  // ============================================
   //  POST /auth/register
-  // ============================================
   async register(req, res) {
     try {
       const { nome, email, senha } = req.body;
