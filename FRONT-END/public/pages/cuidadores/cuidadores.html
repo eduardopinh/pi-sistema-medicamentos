@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gerenciamento de Cuidadores</title>
+    <link rel="stylesheet" href="../cuidadores/cuidadores.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="profile-area">
+          <img src="https://i.pravatar.cc/80" class="avatar" />
+          <h3>Admin</h3>
+          <span>admin@healthcontrol.com</span>
+        </div>
+
+        <nav class="menu">
+          <a href="#">Dashboard</a>
+          <a href="#">Idosos</a>
+          <a href="#" class="active">Cuidadores</a>
+          <a href="#">Medicamentos</a>
+          <a href="#">Relatórios</a>
+        </nav>
+
+        <div class="bottom-menu">
+          <a href="#">Configurações</a>
+          <a href="#" class="logout">Sair</a>
+        </div>
+      </aside>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="content">
+        <div class="header">
+          <h1>Gerenciamento de Cuidadores</h1>
+          <p>Adicione, visualize e gerencie os cuidadores.</p>
+
+          <button class="add-btn">+ Adicionar Novo Cuidador</button>
+        </div>
+
+        <div class="search-area">
+          <span class="icon">🔍</span>
+          <input
+            type="text"
+            placeholder="Pesquisar por nome ou CPF do cuidador"
+          />
+        </div>
+
+        <!-- TABELA -->
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>Nome Completo</th>
+                <th>CPF</th>
+                <th>Telefone/WhatsApp</th>
+                <th>Idosos Vinculados</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>Ana Silva</td>
+                <td>***123.456-**</td>
+                <td>(11) 98765-4321</td>
+                <td>Maria Souza, João Lima</td>
+                <td>
+                  <a class="edit">Editar</a>
+                  <a class="delete">Excluir</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Carlos Pereira</td>
+                <td>***254.567-**</td>
+                <td>(21) 91254-5678</td>
+                <td>José Ferreira</td>
+                <td>
+                  <a class="edit">Editar</a>
+                  <a class="delete">Excluir</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Beatriz Costa</td>
+                <td>***345.678-**</td>
+                <td>(31) 95678-1234</td>
+                <td>Maria Souza</td>
+                <td>
+                  <a class="edit">Editar</a>
+                  <a class="delete">Excluir</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>Roberto Almeida</td>
+                <td>***456.789-**</td>
+                <td>(41) 98765-1234</td>
+                <td>Joana Martins, Pedro Gonçalves</td>
+                <td>
+                  <a class="edit">Editar</a>
+                  <a class="delete">Excluir</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- PAGINAÇÃO -->
+        <div class="pagination">
+          <button class="page active">1</button>
+          <button class="page">2</button>
+          <span class="dots">…</span>
+          <button class="page">10</button>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

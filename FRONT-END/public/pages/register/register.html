@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - HealthCare App</title>
+    <link rel="stylesheet" href="register.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="logo">
+          <img src="logo.png" alt="HealthCare App" />
+          <h2>HealthCare App</h2>
+        </div>
+
+        <h1 class="title">
+          Crie sua Conta de <br />
+          Administrador
+        </h1>
+
+        <p class="subtitle">
+          Preencha os campos abaixo para começar a gerenciar os cuidados.
+        </p>
+
+        <form class="form">
+          <label>Nome Completo</label>
+          <input type="text" placeholder="Digite seu nome completo" />
+
+          <label>E-mail</label>
+          <input type="email" placeholder="seuemail@exemplo.com" />
+
+          <div class="row">
+            <div class="col">
+              <label>CPF</label>
+              <input type="text" placeholder="000.000.000-00" />
+            </div>
+
+            <div class="col">
+              <label>Telefone/WhatsApp</label>
+              <input type="text" placeholder="(00) 00000-0000" />
+            </div>
+          </div>
+
+          <label>Senha</label>
+          <div class="password-field">
+            <input type="password" placeholder="Crie uma senha forte" />
+            <span class="toggle">👁</span>
+          </div>
+
+          <label>Confirmar Senha</label>
+          <input type="password" placeholder="Confirme sua senha" />
+
+          <button type="submit" class="btn">Criar Conta</button>
+
+          <p class="login-link">
+            Já tem uma conta? <a href="/FRONT-END/public/pages/login/login.html">Faça login</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,277 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f4f7fa;
+}
+
+/* ---------------- LAYOUT ---------------- */
+
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+
+.sidebar {
+  width: 250px;
+  background: #ffffff;
+  border-right: 1px solid #e1e1e1;
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.profile-mini {
+  text-align: center;
+}
+
+.profile-mini .avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+
+.profile-mini h3 {
+  margin-top: 8px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.profile-mini span {
+  font-size: 13px;
+  color: #666;
+}
+
+.menu {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.menu a {
+  text-decoration: none;
+  padding: 10px;
+  color: #444;
+  border-radius: 8px;
+}
+
+.menu a.active {
+  background: #0ea5e9;
+  color: white;
+}
+
+.new-patient {
+  margin-top: 25px;
+  background: #0ea5e9;
+  color: #fff;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.logout {
+  color: #d9534f !important;
+}
+
+/* ---------------- TOP BAR ---------------- */
+
+.content {
+  flex: 1;
+  padding: 30px 40px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-box {
+  background: white;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #dcdcdc;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  border: none;
+  outline: none;
+  padding-left: 8px;
+}
+
+.profile-pic {
+  width: 38px;
+  border-radius: 50%;
+}
+
+/* ---------------- TÍTULO ---------------- */
+
+.title-area {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 25px;
+}
+
+.edit-btn {
+  background: #e9f5ff;
+  border: 1px solid #bdddff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ---------------- CARD DO PACIENTE ---------------- */
+
+.patient-card {
+  margin-top: 20px;
+  background: white;
+  display: flex;
+  gap: 20px;
+  padding: 25px;
+  border-radius: 12px;
+  align-items: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.patient-img {
+  width: 85px;
+  border-radius: 50%;
+}
+
+.status {
+  margin-top: 8px;
+  padding: 6px 10px;
+  background: #cef7d6;
+  color: #167c28;
+  border-radius: 8px;
+  font-size: 13px;
+  display: inline-block;
+}
+
+/* ---------------- ABAS ---------------- */
+
+.tabs {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+}
+
+.tab {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding-bottom: 10px;
+  font-weight: 500;
+  color: #555;
+}
+
+.tab.active {
+  border-bottom: 3px solid #0ea5e9;
+  color: #0ea5e9;
+}
+
+/* ---------------- GRID PRINCIPAL ---------------- */
+
+.grid {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+}
+
+/* LEFT CARD */
+
+.left-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+}
+
+.left-card h4 {
+  margin-top: 15px;
+}
+
+.badge {
+  background: #ffcccc;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #a00;
+}
+
+/* RIGHT CARD */
+
+.right-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.05);
+}
+
+.header-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.add-btn {
+  background: #e9f5ff;
+  border: 1px solid #bdddff;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* ---------------- ACORDEÃO ---------------- */
+
+.accordion summary {
+  padding: 15px;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+}
+
+.accordion .doctor {
+  display: block;
+  font-size: 12px;
+  color: #777;
+}
+
+/* ---------------- RESPONSIVIDADE ---------------- */
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 750px) {
+  .sidebar {
+    display: none;
+  }
+
+  .topbar {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .title-area {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

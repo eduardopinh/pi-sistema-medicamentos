@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registrar Medicamento</title>
+    <link rel="stylesheet" href="../medicamentos/medicamentos.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="back-btn"><a href="../painel/painel.html">←</a></div>
+        <h1>Registrar Medicamento</h1>
+        <div class="spacer"></div>
+      </div>
+
+      <!-- Card 1 - Identificação do Medicamento -->
+      <div class="card">
+        <h2 class="section-title">Identificação do Medicamento</h2>
+
+        <label>Nome do medicamento</label>
+        <input type="text" placeholder="Ex: Paracetamol 750mg" />
+
+        <label>Classificação</label>
+        <div class="tag-container">
+          <button class="tag">Uso Contínuo</button>
+          <button class="tag">Antibiótico</button>
+          <button class="tag">Controle Especial</button>
+        </div>
+      </div>
+
+      <!-- Card 2 - Prescrição médica -->
+      <div class="card">
+        <h2 class="section-title">Prescrição Médica</h2>
+
+        <div class="row">
+          <div class="col">
+            <label>Médico prescritor</label>
+            <input type="text" placeholder="Ex: Dr. João da Silva" />
+          </div>
+
+          <div class="col">
+            <label>Especialidade médica</label>
+            <select>
+              <option>Selecione a especialidade</option>
+              <option>Cardiologia</option>
+              <option>Pediatria</option>
+              <option>Dermatologia</option>
+              <option>Ortopedia</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 - Administração -->
+      <div class="card">
+        <h2 class="section-title">Detalhes de Administração</h2>
+
+        <label>Quantidade inicial em estoque</label>
+        <div class="row">
+          <input type="number" placeholder="Ex: 30" />
+          <span class="unit">comprimidos</span>
+        </div>
+
+        <label>Horários de administração</label>
+        <div class="time-row">
+          <input type="time" />
+          <button class="period-btn">AM</button>
+        </div>
+
+        <div class="time-row">
+          <input type="time" />
+          <button class="period-btn">PM</button>
+        </div>
+
+        <button class="add-time-btn">+ Adicionar horário</button>
+
+        <label>Instruções especiais</label>
+        <textarea
+          placeholder="Ex: Tomar 30 minutos antes do café da manhã, com um copo cheio de água."
+        ></textarea>
+      </div>
+
+      <!-- Botões finais -->
+      <div class="footer-btns">
+        <button class="cancel">Cancelar</button>
+        <button class="save">Salvar Medicamento</button>
+      </div>
+    </div>
+  </body>
+</html>

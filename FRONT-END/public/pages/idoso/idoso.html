@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Perfil do Paciente</title>
+    <link rel="stylesheet" href="../idoso/idoso.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="profile-mini">
+          <img src="https://i.pravatar.cc/80?img=45" class="avatar" />
+          <h3>Dr. Ana Souza</h3>
+          <span>Geriatra</span>
+        </div>
+
+        <nav class="menu">
+          <a href="#">Dashboard</a>
+          <a href="#" class="active">Pacientes</a>
+          <a href="#">Agenda</a>
+          <a href="#">Relatórios</a>
+          <a href="#">Comunidade</a>
+        </nav>
+
+        <button class="new-patient">+ Novo Paciente</button>
+
+        <div class="bottom-menu">
+          <a href="#">Configurações</a>
+          <a class="logout">Sair</a>
+        </div>
+      </aside>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="content">
+        <!-- HEADER -->
+        <header class="topbar">
+          <div class="search-box">
+            <span class="icon">🔍</span>
+            <input type="text" placeholder="Pesquisar paciente..." />
+          </div>
+
+          <div class="icons">
+            <span class="notif">🔔</span>
+            <img src="https://i.pravatar.cc/40" class="profile-pic" />
+          </div>
+        </header>
+
+        <!-- TÍTULO -->
+        <div class="title-area">
+          <h1>Perfil de Maria da Silva</h1>
+          <button class="edit-btn">Editar Perfil</button>
+        </div>
+
+        <!-- CARD DO PACIENTE -->
+        <div class="patient-card">
+          <img src="https://i.pravatar.cc/120?img=55" class="patient-img" />
+
+          <div class="info">
+            <h2>Maria da Silva</h2>
+            <span>82 anos</span>
+
+            <div class="status">Cuidados Ativos</div>
+          </div>
+        </div>
+
+        <!-- ABAS -->
+        <div class="tabs">
+          <button class="tab active">Medicamentos</button>
+          <button class="tab">Sinais Vitais</button>
+          <button class="tab">Eventos Adversos</button>
+          <button class="tab">Agenda</button>
+          <button class="tab">Relatórios</button>
+        </div>
+
+        <!-- GRID PRINCIPAL -->
+        <div class="grid">
+          <!-- CARD ESQUERDO -->
+          <div class="left-card">
+            <h3>Dados Gerais</h3>
+
+            <p>
+              <strong>Nome Completo:</strong><br />
+              Maria da Silva Pereira
+            </p>
+
+            <p>
+              <strong>Data de Nascimento:</strong><br />
+              05 de Abril de 1942 (82 anos)
+            </p>
+
+            <p>
+              <strong>Informações Médicas:</strong><br />
+              Alergia: Amoxicilina. Plano de saúde: Unimed.
+            </p>
+
+            <h4>Contatos de Emergência</h4>
+
+            <p>
+              <strong>João da Silva</strong> (Filho) <br />
+              📞 (11) 98765-4321 <span class="badge">Principal</span>
+            </p>
+
+            <p>
+              <strong>Ana Costa</strong> (Cuidadora) <br />
+              📞 (21) 91236-1578
+            </p>
+          </div>
+
+          <!-- CARD DIREITO (ACORDEÕES) -->
+          <div class="right-card">
+            <div class="header-card">
+              <h3>Doenças e Condições Clínicas</h3>
+              <button class="add-btn">Adicionar</button>
+            </div>
+
+            <!-- ACORDEÃO 1 -->
+            <details class="accordion">
+              <summary>
+                Hipertensão Arterial
+                <span class="doctor">Dr. Carlos Andrade (Cardiologista)</span>
+              </summary>
+            </details>
+
+            <!-- ACORDEÃO 2 -->
+            <details class="accordion">
+              <summary>
+                Diabetes Mellitus Tipo 2
+                <span class="doctor"
+                  >Dra. Lucas Monteiro (Endocrinologista)</span
+                >
+              </summary>
+            </details>
+
+            <!-- ACORDEÃO 3 -->
+            <details class="accordion">
+              <summary>
+                Osteoartrite
+                <span class="doctor">Dr. Roberto Lima (Reumatologista)</span>
+              </summary>
+            </details>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>

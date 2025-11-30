@@ -1,0 +1,138 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel de Controle</title>
+    <link rel="stylesheet" href="painel.css" />
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="user-box">
+        <img
+          src="https://cdn-icons-png.flaticon.com/512/847/847969.png"
+          class="user-img"
+        />
+        <div>
+          <strong>Admin User</strong>
+          <p>admin@health.com</p>
+          <a href="../perfil/perfil.html">Acessar Perfil</a>
+        </div>
+      </div>
+
+      <ul class="menu">
+        <li class="active">Painel</li>
+        <li><a href="../pacientes/pacientes.html">Pacientes</a></li>
+        <li>
+          <a href="../medicamentos/medicamento.html">Medicamentos</a>
+        </li>
+        <li><a href="../cuidadores/cuidadores.html">Cuidadores</a></li>
+        <li><a href="../relatorio/relatorio.html">Relatórios</a></li>
+      </ul>
+
+      <div class="config-box">⚙️ Configurações</div>
+    </div>
+
+    <div class="main">
+      <header class="topbar">
+        <h2>Painel de Controle</h2>
+        <input type="text" placeholder="Encontrar paciente..." class="search" />
+        <div class="icons">🔔 👤</div>
+      </header>
+
+      <div class="cards">
+        <div class="patient-card">
+          <img src="https://i.pravatar.cc/100?img=5" class="photo" />
+          <h3>Amélia Correia</h3>
+          <div class="tags">
+            <span class="tag orange">!</span>
+            <span class="tag yellow">2</span>
+            <span class="tag blue">📅</span>
+          </div>
+
+          <div class="info">
+            <p class="label">PRÓXIMA AÇÃO</p>
+            <p class="value">Losartana 50mg às <strong>14:00</strong></p>
+          </div>
+
+          <div class="info">
+            <p class="label">EVENTOS RECENTES</p>
+            <p class="value">Pico de pressão</p>
+          </div>
+
+          <button class="btn">Ver Detalhes</button>
+        </div>
+
+        <div class="patient-card">
+          <img src="https://i.pravatar.cc/100?img=12" class="photo" />
+          <h3>Bernardo Lima</h3>
+          <div class="tags">
+            <span class="tag gray">○</span>
+            <span class="tag gray">○</span>
+            <span class="tag gray">○</span>
+          </div>
+
+          <div class="info">
+            <p class="label">PRÓXIMA AÇÃO</p>
+            <p class="value">Metformina 850mg às <strong>15:00</strong></p>
+          </div>
+
+          <div class="info">
+            <p class="label">EVENTOS RECENTES</p>
+            <p class="value">Nenhuma alteração</p>
+          </div>
+
+          <button class="btn">Ver Detalhes</button>
+        </div>
+
+        <div class="patient-card">
+          <img src="https://i.pravatar.cc/100?img=20" class="photo" />
+          <h3>Cecília Nunes</h3>
+          <div class="tags">
+            <span class="tag orange">!</span>
+            <span class="tag yellow">3</span>
+            <span class="tag blue">📅</span>
+          </div>
+
+          <div class="info">
+            <p class="label">PRÓXIMA AÇÃO</p>
+            <p class="value">Atorvastatina 20mg às <strong>16:00</strong></p>
+          </div>
+
+          <div class="info">
+            <p class="label">EVENTOS RECENTES</p>
+            <p class="value">Queda reportada</p>
+          </div>
+
+          <button class="btn">
+            <a href="../idoso/idoso.html">Ver Detalhes</a>
+          </button>
+        </div>
+
+        <div class="patient-card">
+          <img src="https://i.pravatar.cc/100?img=30" class="photo" />
+          <h3>Davi Farias</h3>
+          <div class="tags">
+            <span class="tag gray">○</span>
+            <span class="tag gray">○</span>
+            <span class="tag blue">1</span>
+          </div>
+
+          <div class="info">
+            <p class="label">PRÓXIMA AÇÃO</p>
+            <p class="value">Levotiroxina 75mcg às <strong>17:00</strong></p>
+          </div>
+
+          <div class="info">
+            <p class="label">EVENTOS RECENTES</p>
+            <p class="value">Nenhuma alteração</p>
+          </div>
+
+          <button class="btn">Ver Detalhes</button>
+        </div>
+        <a href="../cadastroIdoso/cadastroIdoso.html">teste</a>
+      </div>
+    </div>
+  </body>
+</html>

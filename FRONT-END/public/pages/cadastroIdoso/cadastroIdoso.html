@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cadastro de Idoso</title>
+    <link rel="stylesheet" href="../cadastroIdoso/cadastroIdoso.css" />
+  </head>
+  <body>
+    <main class="page">
+      <div class="content">
+        <h1 class="page-title">Cadastro de Idoso</h1>
+        <p class="page-sub">
+          Preencha os campos abaixo para adicionar um novo idoso ao sistema.
+        </p>
+
+        <!-- FORM CARD -->
+        <form class="card form-card" id="form-idoso" autocomplete="off">
+          <!-- Dados Gerais -->
+          <div class="section">
+            <div class="section-header">
+              <h2>Dados Gerais</h2>
+            </div>
+
+            <label class="label">Nome completo</label>
+            <input
+              class="input"
+              name="nome"
+              type="text"
+              placeholder="Digite o nome completo"
+            />
+
+            <div class="row">
+              <div class="col">
+                <label class="label">Data de nascimento</label>
+                <input class="input" name="data_nasc" type="date" />
+              </div>
+              <div class="col">
+                <label class="label">Telefone</label>
+                <input
+                  class="input"
+                  name="telefone"
+                  type="text"
+                  placeholder="(00) 00000-0000"
+                />
+              </div>
+            </div>
+
+            <!-- Contatos de emergência -->
+            <div class="contacts">
+              <label class="label">Contatos de emergência</label>
+
+              <div id="contacts-list">
+                <!-- um contato exemplo (pode duplicar por JS) -->
+                <div class="contact-row">
+                  <input
+                    class="input small"
+                    name="contato_nome[]"
+                    type="text"
+                    placeholder="Nome do contato"
+                  />
+                  <input
+                    class="input small"
+                    name="contato_tel[]"
+                    type="text"
+                    placeholder="(00) 00000-0000"
+                  />
+                  <button
+                    type="button"
+                    class="icon-btn remove-contact"
+                    title="Remover contato"
+                    aria-label="Remover"
+                  >
+                    <!-- trash svg -->
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      aria-hidden
+                    >
+                      <path
+                        d="M3 6h18"
+                        stroke="#6b7280"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6"
+                        stroke="#6b7280"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M10 11v6M14 11v6"
+                        stroke="#6b7280"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                      <path
+                        d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
+                        stroke="#6b7280"
+                        stroke-width="1.6"
+                        stroke-linecap="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" id="add-contact" class="link-btn">
+                <!-- plus icon -->
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="#0ea5e9"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Adicionar Contato
+              </button>
+            </div>
+
+            <label class="label">Informações gerais relevantes</label>
+            <textarea
+              class="input textarea"
+              name="informacoes"
+              placeholder="Alergias, plano de saúde, observações..."
+            ></textarea>
+          </div>
+
+          <!-- Doenças e Condições Clínicas -->
+          <div class="section">
+            <div class="section-header between">
+              <h2>Cadastro de Doenças & Condições Clínicas</h2>
+              <!-- botão de adicionar doença -->
+              <button type="button" id="add-condition" class="link-btn small">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden
+                >
+                  <path
+                    d="M12 5v14M5 12h14"
+                    stroke="#0ea5e9"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                  />
+                </svg>
+                Adicionar Doença
+              </button>
+            </div>
+
+            <div id="conditions-list">
+              <!-- Exemplo de bloco de condição -->
+              <div class="condition-card">
+                <button
+                  type="button"
+                  class="icon-btn remove-condition"
+                  title="Remover condição"
+                  aria-label="Remover"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path
+                      d="M3 6h18"
+                      stroke="#6b7280"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6"
+                      stroke="#6b7280"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"
+                      stroke="#6b7280"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+                </button>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="label">Diagnóstico</label>
+                    <input
+                      class="input"
+                      name="condicao_nome[]"
+                      type="text"
+                      value="Hipertensão"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <label class="label">Data do diagnóstico</label>
+                    <input
+                      class="input"
+                      name="condicao_data[]"
+                      type="date"
+                      value="2018-05-15"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="label">Médico responsável</label>
+                    <input
+                      class="input"
+                      name="condicao_medico[]"
+                      type="text"
+                      value="Dr. Carlos Andrade"
+                    />
+                  </div>
+                  <div class="col"></div>
+                </div>
+
+                <label class="label">Observações médicas</label>
+                <textarea class="input textarea" name="condicao_obs[]">
+Quadro estável. Uso contínuo de Losartana 50mg.</textarea
+                >
+              </div>
+            </div>
+
+            <p class="muted center" id="no-conditions" style="display: none">
+              Nenhuma outra doença cadastrada.
+            </p>
+          </div>
+
+          <!-- Ações -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Salvar Idoso</button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <script>
+      // JS mínimo para duplicar/remover contatos e condições (puro, sem libs).
+      (function () {
+        const contactsList = document.getElementById("contacts-list");
+        const addContactBtn = document.getElementById("add-contact");
+
+        addContactBtn.addEventListener("click", () => {
+          const row = document.createElement("div");
+          row.className = "contact-row";
+          row.innerHTML = `
+          <input class="input small" name="contato_nome[]" type="text" placeholder="Nome do contato" />
+          <input class="input small" name="contato_tel[]" type="text" placeholder="(00) 00000-0000" />
+          <button type="button" class="icon-btn remove-contact" title="Remover contato" aria-label="Remover">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d="M3 6h18" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </button>`;
+          contactsList.appendChild(row);
+        });
+
+        contactsList.addEventListener("click", (ev) => {
+          if (ev.target.closest(".remove-contact")) {
+            const row = ev.target.closest(".contact-row");
+            row && row.remove();
+          }
+        });
+
+        const conditionsList = document.getElementById("conditions-list");
+        const addConditionBtn = document.getElementById("add-condition");
+        const noConditions = document.getElementById("no-conditions");
+
+        addConditionBtn.addEventListener("click", () => {
+          noConditions.style.display = "none";
+          const card = document.createElement("div");
+          card.className = "condition-card";
+          card.innerHTML = `
+          <button type="button" class="icon-btn remove-condition" title="Remover condição" aria-label="Remover">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M3 6h18" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/><path d="M8 6v12a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V6" stroke="#6b7280" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </button>
+          <div class="row">
+            <div class="col"><label class="label">Diagnóstico</label><input class="input" name="condicao_nome[]" type="text" /></div>
+            <div class="col"><label class="label">Data do diagnóstico</label><input class="input" name="condicao_data[]" type="date" /></div>
+          </div>
+          <div class="row"><div class="col"><label class="label">Médico responsável</label><input class="input" name="condicao_medico[]" type="text" /></div><div class="col"></div></div>
+          <label class="label">Observações médicas</label><textarea class="input textarea" name="condicao_obs[]"></textarea>
+        `;
+          conditionsList.appendChild(card);
+        });
+
+        conditionsList.addEventListener("click", (ev) => {
+          if (ev.target.closest(".remove-condition")) {
+            const card = ev.target.closest(".condition-card");
+            card && card.remove();
+            if (!conditionsList.querySelector(".condition-card"))
+              noConditions.style.display = "";
+          }
+        });
+
+        // if form submit:
+        document
+          .getElementById("form-idoso")
+          .addEventListener("submit", (e) => {
+            e.preventDefault();
+            // serializar form e enviar via fetch para sua API
+            const fd = new FormData(e.target);
+            // exemplo: enviar para /api/idosos
+            // fetch('/api/idosos', { method: 'POST', body: fd }) ...
+            alert(
+              "Formulário preparado — implemente fetch() conforme sua API."
+            );
+          });
+      })();
+    </script>
+  </body>
+</html>

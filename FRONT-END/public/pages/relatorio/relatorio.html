@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatórios e Históricos</title>
+    <link rel="stylesheet" href="../relatorio/relatorio.css" />
+  </head>
+  <body>
+    <div class="page">
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="logo-area">
+          <h2>MedControl</h2>
+        </div>
+
+        <nav class="menu">
+          <a href="#" class="item">Dashboard</a>
+          <a href="#" class="item">Pacientes</a>
+          <a href="#" class="item active">Relatórios</a>
+        </nav>
+
+        <div class="bottom-area">
+          <div class="user-box">
+            <img src="https://i.pravatar.cc/80" class="avatar" />
+            <div>
+              <strong>Admin</strong>
+              <p>admin@medcontrol.com</p>
+            </div>
+          </div>
+
+          <a href="#" class="item config">Configurações</a>
+          <a href="#" class="item logout">Sair</a>
+        </div>
+      </aside>
+
+      <!-- CONTENT -->
+      <main class="content">
+        <h1 class="title">Relatórios e Históricos</h1>
+        <p class="subtitle">
+          Gere e visualize relatórios detalhados sobre os cuidados.
+        </p>
+
+        <div class="layout">
+          <!-- COLUNA DE FILTROS -->
+          <div class="filters card">
+            <h3 class="filter-title">Filtros</h3>
+
+            <label class="label">Selecionar Idoso</label>
+            <select class="input">
+              <option>Todos os idosos</option>
+              <option>Maria Silva</option>
+              <option>João Almeida</option>
+              <option>Ana Souza</option>
+            </select>
+
+            <label class="label">Período</label>
+
+            <div class="period-options">
+              <button class="period active">Últimos 7 dias</button>
+              <button class="period">Último mês</button>
+              <button class="period">Últimos 3 meses</button>
+              <button class="period">Personalizado</button>
+            </div>
+          </div>
+
+          <!-- COLUNA DIREITA — LISTA DE RELATÓRIOS -->
+          <div class="reports">
+            <!-- ITEM 1 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">💊</div>
+                <div>
+                  <h4>Medicamentos</h4>
+                  <p>Listagem de todos os medicamentos prescritos e em uso.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+
+            <!-- ITEM 2 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">📅</div>
+                <div>
+                  <h4>Administração e Aderência</h4>
+                  <p>Acompanhamento de horários e adesão ao tratamento.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+
+            <!-- ITEM 3 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">🫁</div>
+                <div>
+                  <h4>Sinais Vitais</h4>
+                  <p>Gráficos de pressão, glicemia, temperatura e mais.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+
+            <!-- ITEM 4 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">🧬</div>
+                <div>
+                  <h4>Doenças e Histórico Clínico</h4>
+                  <p>Informações sobre condições crônicas e alergias.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+
+            <!-- ITEM 5 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">⚠️</div>
+                <div>
+                  <h4>Eventos Adversos</h4>
+                  <p>Registros de quedas, reações e outros incidentes.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+
+            <!-- ITEM 6 -->
+            <div class="report card">
+              <div class="info">
+                <div class="icon-box">🩻</div>
+                <div>
+                  <h4>Consultas e Exames</h4>
+                  <p>Agenda de resultados e exames médicos realizados.</p>
+                </div>
+              </div>
+
+              <div class="actions">
+                <button class="btn ghost">Visualizar</button>
+                <button class="btn primary">Exportar PDF</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>
+</html>
