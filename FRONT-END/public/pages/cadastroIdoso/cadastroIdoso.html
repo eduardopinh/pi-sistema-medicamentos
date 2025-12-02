@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Cadastro de Idoso</title>
+
+    <!-- CSS GLOBAL DO PAINEL -->
+    <link rel="stylesheet" href="../../css/global.css" />
+
+    <!-- CSS ESPECÍFICO DO CADASTRO -->
+    <link rel="stylesheet" href="../../css/cadastroIdoso.css" />
+  </head>
+
+  <body>
+    <div class="layout">
+      <!-- SIDEBAR (MESMA DO PAINEL) -->
+      <aside class="sidebar">
+        <div>
+          <div class="profile-area">
+            <img src="../img/user.jpg" class="avatar" />
+            <div>
+              <h3>Administrador</h3>
+              <span>admin@empresa.com</span>
+            </div>
+          </div>
+
+          <nav class="menu">
+            <a href="../painel/painel.html">Painel</a>
+          </nav>
+        </div>
+
+        <div class="bottom-menu">
+          <a href="#">Configurações</a>
+          <a href="#">Sair</a>
+        </div>
+      </aside>
+
+      <!-- CONTEÚDO PRINCIPAL -->
+      <main class="content">
+        <!-- TOPBAR -->
+        <div class="topbar">
+          <h2>Cadastro de Idoso</h2>
+        </div>
+
+        <p class="page-sub">
+          Preencha os campos abaixo para adicionar um novo idoso ao sistema.
+        </p>
+
+        <!-- FORM CARD -->
+        <form class="card form-card" id="form-idoso" autocomplete="off">
+          <!-- --- Dados Gerais --- -->
+          <div class="section">
+            <div class="section-header">
+              <h2>Dados Gerais</h2>
+            </div>
+
+            <label class="label">Nome completo</label>
+            <input
+              class="input"
+              name="nome"
+              type="text"
+              placeholder="Digite o nome completo"
+            />
+
+            <div class="row">
+              <div class="col">
+                <label class="label">Data de nascimento</label>
+                <input class="input" name="data_nasc" type="date" />
+              </div>
+
+              <div class="col">
+                <label class="label">Telefone</label>
+                <input
+                  class="input"
+                  name="telefone"
+                  type="text"
+                  placeholder="(00) 00000-0000"
+                />
+              </div>
+            </div>
+
+            <!-- Contatos -->
+            <div class="contacts">
+              <label class="label">Contatos de emergência</label>
+
+              <div id="contacts-list">
+                <div class="contact-row">
+                  <input
+                    class="input small"
+                    name="contato_nome[]"
+                    type="text"
+                    placeholder="Nome do contato"
+                  />
+                  <input
+                    class="input small"
+                    name="contato_tel[]"
+                    type="text"
+                    placeholder="(00) 00000-0000"
+                  />
+
+                  <button type="button" class="icon-btn remove-contact">
+                    ✖
+                  </button>
+                </div>
+              </div>
+
+              <button type="button" id="add-contact" class="link-btn">
+                ➕ Adicionar Contato
+              </button>
+            </div>
+
+            <label class="label">Informações gerais relevantes</label>
+            <textarea
+              class="input textarea"
+              name="informacoes"
+              placeholder="Alergias, condições, observações..."
+            ></textarea>
+          </div>
+
+          <!-- --- Doenças e Condições --- -->
+          <div class="section">
+            <div class="section-header between">
+              <h2>Doenças & Condições Clínicas</h2>
+
+              <button type="button" id="add-condition" class="link-btn small">
+                ➕ Adicionar Doença
+              </button>
+            </div>
+
+            <div id="conditions-list">
+              <div class="condition-card">
+                <button type="button" class="icon-btn remove-condition">
+                  ✖
+                </button>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="label">Diagnóstico</label>
+                    <input
+                      class="input"
+                      name="condicao_nome[]"
+                      type="text"
+                      value="Hipertensão"
+                    />
+                  </div>
+
+                  <div class="col">
+                    <label class="label">Data do diagnóstico</label>
+                    <input
+                      class="input"
+                      name="condicao_data[]"
+                      type="date"
+                      value="2018-05-15"
+                    />
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col">
+                    <label class="label">Médico responsável</label>
+                    <input
+                      class="input"
+                      name="condicao_medico[]"
+                      type="text"
+                      value="Dr. Carlos Andrade"
+                    />
+                  </div>
+                </div>
+
+                <label class="label">Observações médicas</label>
+                <textarea class="input textarea" name="condicao_obs[]">
+Quadro estável. Uso contínuo de Losartana 50mg.</textarea
+                >
+              </div>
+            </div>
+
+            <p class="muted center" id="no-conditions" style="display: none">
+              Nenhuma doença cadastrada.
+            </p>
+          </div>
+
+          <!-- --- Ações --- -->
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-ghost"
+              onclick="history.back()"
+            >
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-primary">Salvar Idoso</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="./cadastroIdoso.js"></script>
+  </body>
+</html>

@@ -1,1 +1,0 @@
-// Saber se o usuário está logado
