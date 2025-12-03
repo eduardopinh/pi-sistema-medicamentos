@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cuidar+ - Login</title>
-    <link rel="stylesheet" href="login.css" />
+    <link rel="stylesheet" href="../../public/css/login.css" />
   </head>
+
   <body>
     <div class="container">
       <div class="logo-area">
@@ -19,17 +20,27 @@
           Faça login para gerenciar cuidados e informações.
         </p>
 
-        <form>
-          <label>E-mail ou CPF</label>
+        <!-- FORMULÁRIO -->
+        <form id="formLogin">
+
+          <label for="loginInput">E-mail ou CPF</label>
           <div class="input-field">
             <span class="icon">👤</span>
-            <input type="text" placeholder="Digite seu e-mail ou CPF" />
+            <input
+              id="loginInput"
+              type="text"
+              placeholder="Digite seu e-mail ou CPF"
+            />
           </div>
 
-          <label>Senha</label>
+          <label for="senhaInput">Senha</label>
           <div class="input-field">
             <span class="icon">🔒</span>
-            <input type="password" placeholder="Digite sua senha" />
+            <input
+              id="senhaInput"
+              type="password"
+              placeholder="Digite sua senha"
+            />
             <span class="toggle">👁</span>
           </div>
 
@@ -41,18 +52,19 @@
             <a href="#" class="forgot">Esqueci minha senha</a>
           </div>
 
-          <button class="btn">
-            <a href="/FRONT-END/public/pages/painel/painel.html">Entrar</a>
-          </button>
+          <button type="submit" class="btn">Entrar</button>
 
           <p class="register">
             Ainda não possui uma conta?
-            <a href="/FRONT-END/public/pages/register/register.html"
-              >Cadastre-se</a
-            >
+            <a href="../register/register.html">Cadastre-se</a>
           </p>
         </form>
       </div>
     </div>
+
+    <!-- AXIOS + SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/FRONT-END/public/js/api.js"></script>
+    <script src="login.js"></script>
   </body>
 </html>

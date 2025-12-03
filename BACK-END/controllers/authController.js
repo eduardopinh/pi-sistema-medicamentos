@@ -1,12 +1,14 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Quando o banco estiver pronto, descomente:
-// const db = require("../config/database");
+// IMPORTAR BANCO (agora funciona)
+const db = require("../config/database");
 
 module.exports = {
 
-  //  POST /auth/register
+  // ==========================================
+  // POST /auth/register
+  // ==========================================
   async register(req, res) {
     try {
       const { nome, email, senha } = req.body;
@@ -18,47 +20,36 @@ module.exports = {
         });
       }
 
-      // ==== VERIFICAÇÃO DE E-MAIL (ativado quando houver DB) ====
-      //
-      // const [userExists] = await db.query(
-      //   "SELECT id FROM usuarios WHERE email = ?",
-      //   [email]
-      // );
-      //
-      // if (userExists.length > 0) {
-      //   return res.status(409).json({
-      //     status: "erro",
-      //     message: "Este email já está cadastrado."
-      //   });
-      // }
+      // Verifica email
+      const [userExists] = await db.query(
+        "SELECT * FROM administrador WHERE email = ?",
+        [email]
+      );
 
-      // ==== CRIAR HASH DA SENHA ====
+      if (userExists.length > 0) {
+        return res.status(409).json({
+          status: "erro",
+          message: "Este email já está cadastrado."
+        });
+      }
+
+      // Hash da senha
       const senhaHash = await bcrypt.hash(senha, 10);
 
-      // ==== SALVAR NO BANCO (ativar quando DB existir) ====
-      //
-      // const [result] = await db.query(
-      //   "INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)",
-      //   [nome, email, senhaHash]
-      // );
-      //
-      // const novoUsuario = {
-      //   id: result.insertId,
-      //   nome,
-      //   email
-      // };
-
-      // ======== Sem DB ainda: retorno neutro ========
-      const novoUsuario = {
-        id: 0, // será substituído pelo insertId real
-        nome,
-        email
-      };
+      // Inserir administrador
+      const [result] = await db.query(
+        "INSERT INTO administrador (nome, email, senha) VALUES (?, ?, ?)",
+        [nome, email, senhaHash]
+      );
 
       return res.status(201).json({
         status: "ok",
-        message: "Usuário registrado com sucesso (aguardando DB).",
-        user: novoUsuario
+        message: "Administrador registrado com sucesso!",
+        user: {
+          id_adm: result.insertId,
+          nome,
+          email
+        }
       });
 
     } catch (err) {
@@ -70,9 +61,9 @@ module.exports = {
     }
   },
 
-  // ============================================
-  //  POST /auth/login
-  // ============================================
+  // ==========================================
+  // POST /auth/login
+  // ==========================================
   async login(req, res) {
     try {
       const { email, senha } = req.body;
@@ -84,58 +75,52 @@ module.exports = {
         });
       }
 
-      // ==== BUSCAR USUÁRIO NO BANCO (ativar depois) ====
-      //
-      // const [rows] = await db.query(
-      //   "SELECT * FROM usuarios WHERE email = ?",
-      //   [email]
-      // );
-      //
-      // if (rows.length === 0) {
-      //   return res.status(404).json({
-      //     status: "erro",
-      //     message: "Usuário não encontrado."
-      //   });
-      // }
-      //
-      // const usuario = rows[0];
+      // Buscar no banco
+      const [rows] = await db.query(
+        "SELECT * FROM administrador WHERE email = ?",
+        [email]
+      );
 
-      // ======== Sem DB ainda: usuário inexistente ========
-      return res.status(404).json({
-        status: "erro",
-        message: "Usuário não encontrado (aguardando DB)."
+      if (rows.length === 0) {
+        return res.status(404).json({
+          status: "erro",
+          message: "Administrador não encontrado."
+        });
+      }
+
+      const admin = rows[0];
+
+      // Verificar senha
+      const senhaConfere = await bcrypt.compare(senha, admin.senha);
+
+      if (!senhaConfere) {
+        return res.status(401).json({
+          status: "erro",
+          message: "Senha incorreta."
+        });
+      }
+
+      // Criar tokenx'
+      const token = jwt.sign(
+        {
+          id_adm: admin.id_adm,
+          nome: admin.nome,
+          email: admin.email
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "8h" }
+      );
+
+      return res.json({
+        status: "ok",
+        message: "Login realizado com sucesso.",
+        token,
+        user: {
+          id_adm: admin.id_adm,
+          nome: admin.nome,
+          email: admin.email
+        }
       });
-
-      // ==== QUANDO O BANCO EXISTIR, ATIVE AQUI ====
-      //
-      // const senhaConfere = await bcrypt.compare(senha, usuario.senha);
-      // if (!senhaConfere) {
-      //   return res.status(401).json({
-      //     status: "erro",
-      //     message: "Senha incorreta."
-      //   });
-      // }
-      //
-      // const token = jwt.sign(
-      //   {
-      //     id: usuario.id,
-      //     nome: usuario.nome,
-      //     email: usuario.email
-      //   },
-      //   process.env.JWT_SECRET,
-      //   { expiresIn: "8h" }
-      // );
-      //
-      // return res.json({
-      //   status: "ok",
-      //   message: "Login realizado com sucesso.",
-      //   token,
-      //   user: {
-      //     id: usuario.id,
-      //     nome: usuario.nome,
-      //     email: usuario.email
-      //   }
-      // });
 
     } catch (err) {
       console.error("Erro em login:", err);
@@ -146,9 +131,9 @@ module.exports = {
     }
   },
 
-  // ============================================
-  //  GET /auth/me (precisa do middleware)
-  // ============================================
+  // ==========================================
+  // GET /auth/me
+  // ==========================================
   async me(req, res) {
     try {
       return res.json({

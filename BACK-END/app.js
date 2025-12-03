@@ -25,6 +25,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 // Rotas principais
 app.use("/auth", authRoutes);
 app.use("/administracao", administracaoRoutes);
@@ -39,12 +40,13 @@ app.use("/idoso", idosoRoutes);
 app.use("/medicamento", medicamentoRoutes);
 app.use("/sinal-vital", sinalVitalRoutes);
 
-// Rota raiz
+// Servir o FRONT-END
+app.use(express.static(path.join(__dirname, "../FRONT-END")));
+
+// Rota raiz -> abre o FRONT-END/index.html
 app.get("/", (req, res) => {
-  res.json({
-    status: "ok",
-    message: "API funcionando. Disponível em múltiplas rotas."
-  });
+  res.sendFile(path.join(__dirname, "../FRONT-END/index.html"));
 });
+
 
 module.exports = app;
