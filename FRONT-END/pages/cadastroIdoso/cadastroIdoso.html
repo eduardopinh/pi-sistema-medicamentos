@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="../../public/js/api.js"></script>
     <script src="../../public/js/auth.js"></script>
+
     <!-- SIDEBAR GLOBAL -->
     <aside class="sidebar">
       <div class="user-box">
@@ -49,17 +50,15 @@
       </p>
 
       <!-- FORMULÁRIO COMPLETO -->
-      <form class="card form-card" id="form-idoso">
+      <form class="card form-card" id="form-idoso" enctype="multipart/form-data" autocomplete="off">
         <!-- Dados Gerais -->
         <div class="section">
           <div class="section-header">
             <h2>Dados Gerais</h2>
           </div>
-          
-          
-          <label class="label">Foto do Idoso</label>
-          <input type="file" name="foto" id="foto" />
 
+          <label class="label">Foto do Idoso</label>
+          <input type="file" name="foto" id="foto" accept="image/*" />
 
           <label class="label">Nome completo</label>
           <input
@@ -91,22 +90,7 @@
             <label class="label">Contatos de emergência</label>
 
             <div id="contacts-list">
-              <div class="contact-row">
-                <input
-                  class="input small"
-                  name="contato_nome[]"
-                  type="text"
-                  placeholder="Nome do contato"
-                />
-                <input
-                  class="input small"
-                  name="contato_tel[]"
-                  type="text"
-                  placeholder="(00) 00000-0000"
-                />
-
-                <button type="button" class="icon-btn remove-contact">✖</button>
-              </div>
+              <!-- row inicial vazio será criado pelo JS -->
             </div>
 
             <button type="button" id="add-contact" class="link-btn">
@@ -132,47 +116,7 @@
           </div>
 
           <div id="conditions-list">
-            <div class="condition-card">
-              <button type="button" class="icon-btn remove-condition">✖</button>
-
-              <div class="row">
-                <div class="col">
-                  <label class="label">Diagnóstico</label>
-                  <input
-                    class="input"
-                    name="condicao_nome[]"
-                    type="text"
-                    value="Hipertensão"
-                  />
-                </div>
-
-                <div class="col">
-                  <label class="label">Data</label>
-                  <input
-                    class="input"
-                    name="condicao_data[]"
-                    type="date"
-                    value="2018-05-15"
-                  />
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col">
-                  <label class="label">Médico responsável</label>
-                  <input
-                    class="input"
-                    name="condicao_medico[]"
-                    type="text"
-                    value="Dr. Carlos Andrade"
-                  />
-                </div>
-              </div>
-
-              <label class="label">Observações médicas</label>
-              <textarea class="input textarea" name="condicao_obs[]">Quadro estável. Uso contínuo de Losartana 50mg.</textarea
-              >
-            </div>
+            <!-- sem mocks — será populado pelo JS -->
           </div>
         </div>
 

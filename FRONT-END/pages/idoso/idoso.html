@@ -4,14 +4,17 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Perfil do Idoso</title>
-  <link rel="stylesheet" href="/FRONT-END/public/css/global.css" />
-  <link rel="stylesheet" href="/FRONT-END/public/css/idoso.css" />
+
+  <!-- CSS GLOBAL -->
+  <link rel="stylesheet" href="../../public/css/global.css" />
+  <link rel="stylesheet" href="../../public/css/idoso.css" />
 </head>
+
 <body>
-  <!-- scripts carregados no final -->
   <div class="layout">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
-      <!-- copia sidebar do painel - mantém ids para preencher -->
       <div class="user-box">
         <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-img" />
         <div>
@@ -20,18 +23,24 @@
           <a href="/pages/perfil/perfil.html">Acessar Perfil</a>
         </div>
       </div>
+
       <ul class="menu">
         <li><a href="/pages/painel/painel.html">Painel</a></li>
-        <li><a href="/pages/pacientes/pacientes.html">Pacientes</a></li>
+        <li class="active"><a href="/pages/pacientes/pacientes.html">Pacientes</a></li>
       </ul>
     </aside>
 
+    <!-- MAIN -->
     <main class="main">
-      <div class="topbar"><h2 id="idoso-title">Carregando...</h2></div>
 
+      <div class="topbar">
+        <h2 id="idoso-title">Carregando...</h2>
+      </div>
+
+      <!-- CARD DO IDOSO -->
       <div class="card idoso-card">
         <div class="left">
-          <img id="idoso-photo" src="https://i.pravatar.cc/120" class="profile-photo" />
+          <img id="idoso-photo" class="profile-photo" src="https://i.pravatar.cc/120" />
           <div class="info">
             <h2 id="idoso-nome"></h2>
             <span id="idoso-age"></span>
@@ -40,50 +49,60 @@
         </div>
 
         <div class="actions">
-          <a id="editar-link" class="btn" href="#">Editar</a>
+          <a id="editar-link" class="btn">Editar</a>
           <button id="excluir-btn" class="btn btn-danger">Excluir</button>
         </div>
       </div>
 
-      <section class="card">
-        <h3>Contatos</h3>
+      <!-- ABAS -->
+      <div class="tabs">
+        <button class="tab active" data-tab="contatos">Contatos</button>
+        <button class="tab" data-tab="doencas">Doenças</button>
+        <button class="tab" data-tab="medicamentos">Medicamentos</button>
+        <button class="tab" data-tab="sinais">Sinais Vitais</button>
+      </div>
+
+      <!-- CONTEÚDOS -->
+      <section class="tab-content active" id="contatos">
+        <h3>Contatos de Emergência</h3>
         <ul id="idoso-contatos"></ul>
       </section>
 
-      <section class="card">
+      <section class="tab-content" id="doencas">
         <h3>Doenças & Condições</h3>
         <div id="idoso-doencas"></div>
       </section>
 
-      <section class="card">
+      <section class="tab-content" id="medicamentos">
         <h3>Medicamentos</h3>
         <div id="idoso-medicamentos"></div>
       </section>
 
-      <section class="card">
-        <h3>Sinais Vitais</h3>
+      <section class="tab-content" id="sinais">
+        <h3>Sinais Vitais Registrados</h3>
         <div id="idoso-sinais"></div>
 
-        <h4>Adicionar novo registro rápido</h4>
+        <h4>Registrar Novo Sinal</h4>
         <form id="sinal-form">
           <div class="row">
-            <input name="pressao_sistolica" placeholder="Sistólica" type="number" />
-            <input name="pressao_diastolica" placeholder="Diastólica" type="number" />
-            <input name="batimentos" placeholder="BPM" type="number" />
-            <input name="temperatura" placeholder="°C" type="number" step="0.1" />
+            <input name="pressao_sistolica" type="number" placeholder="Sistólica" required />
+            <input name="pressao_diastolica" type="number" placeholder="Diastólica" required />
+            <input name="batimentos" type="number" placeholder="BPM" required />
+            <input name="temperatura" type="number" step="0.1" placeholder="°C" required />
           </div>
           <textarea name="observacoes" placeholder="Observações"></textarea>
-          <button type="submit" class="btn">Salvar Registro</button>
+          <button class="btn" type="submit">Salvar Registro</button>
         </form>
       </section>
 
     </main>
+
   </div>
 
-  <!-- Scripts -->
+  <!-- SCRIPTS -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script src="/FRONT-END/public/js/api.js"></script>
-  <script src="/FRONT-END/public/js/auth.js"></script>
-  <script src="/FRONT-END/public/js/idoso.js"></script>
+  <script src="../../public/js/api.js"></script>
+  <script src="../../public/js/auth.js"></script>
+  <script src="../../public/js/idoso.js"></script>
 </body>
 </html>

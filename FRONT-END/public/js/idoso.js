@@ -1,7 +1,8 @@
-// idoso.js
 document.addEventListener("DOMContentLoaded", () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const id = urlParams.get("id");
+
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get("id");
+
   if (!id) {
     alert("Idoso não especificado.");
     window.location.href = "/pages/pacientes/pacientes.html";
@@ -16,31 +17,48 @@ document.addEventListener("DOMContentLoaded", () => {
   const doencasEl = document.getElementById("idoso-doencas");
   const medsEl = document.getElementById("idoso-medicamentos");
   const sinaisEl = document.getElementById("idoso-sinais");
+
   const editarLink = document.getElementById("editar-link");
   const excluirBtn = document.getElementById("excluir-btn");
   const formSinal = document.getElementById("sinal-form");
 
   function getPhotoUrl(path) {
-    return path ? window.location.origin + path : "https://i.pravatar.cc/120";
+    if (!path) return "https://cdn-icons-png.flaticon.com/512/847/847969.png";
+    return window.location.origin + path;
   }
 
-  function calcAge(dob) {
-    if (!dob) return "";
-    const diff = Date.now() - new Date(dob).getTime();
-    const age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365.25));
-    return `${age} anos`;
+  function calcAge(date) {
+    if (!date) return "";
+    const dt = new Date(date);
+    const diff = Date.now() - dt.getTime();
+    return Math.floor(diff / (1000 * 3600 * 24 * 365.25)) + " anos";
+  }
+
+  function formatDate(d) {
+    if (!d) return "";
+    return new Date(d).toLocaleDateString("pt-BR");
+  }
+
+  function formatDateTime(d) {
+    if (!d) return "";
+    return new Date(d).toLocaleString("pt-BR");
+  }
+
+  function escape(str) {
+    return String(str || "").replace(/[&<>"']/g, m => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;", "'": "&#39;"
+    }[m]));
   }
 
   async function load() {
     try {
       const res = await axios.get(`/api/idosos/${id}`);
       const i = res.data;
-      if (!i) throw new Error("Não encontrado");
 
-      document.getElementById("idoso-title").textContent = i.nome || "Perfil";
-      nomeEl.textContent = i.nome || "";
+      document.getElementById("idoso-title").textContent = i.nome;
+      nomeEl.textContent = i.nome;
       ageEl.textContent = calcAge(i.data_nasc);
-      infoEl.textContent = i.informacoes || "";
+      infoEl.textContent = i.informacoes || "Nenhuma observação registrada";
 
       photoEl.src = getPhotoUrl(i.foto);
 
@@ -48,17 +66,21 @@ document.addEventListener("DOMContentLoaded", () => {
       contatosEl.innerHTML = "";
       (i.contatos || []).forEach(c => {
         const li = document.createElement("li");
-        li.innerHTML = `<strong>${escapeHtml(c.nome)}</strong> — ${escapeHtml(c.telefone || "")}`;
+        li.innerHTML = `<strong>${escape(c.nome)}</strong> — ${escape(c.telefone)}`;
         contatosEl.appendChild(li);
       });
 
       // doenças
       doencasEl.innerHTML = "";
       (i.doencas || []).forEach(d => {
-        const div = document.createElement("div");
-        div.className = "condition-card";
-        div.innerHTML = `<h4>${escapeHtml(d.diagnostico)}</h4><p>${formatDate(d.data)} • ${escapeHtml(d.medico || "")}</p><p>${escapeHtml(d.observacoes || "")}</p>`;
-        doencasEl.appendChild(div);
+        const card = document.createElement("div");
+        card.className = "accordion";
+        card.innerHTML = `
+          <summary>${escape(d.diagnostico)}</summary>
+          <p class='doctor'>${escape(d.medico || "")}</p>
+          <p>${escape(d.observacoes || "")}</p>
+        `;
+        doencasEl.appendChild(card);
       });
 
       // medicamentos
@@ -66,92 +88,76 @@ document.addEventListener("DOMContentLoaded", () => {
       (i.medicamentos || []).forEach(m => {
         const div = document.createElement("div");
         div.className = "med-item";
-        div.innerHTML = `<strong>${escapeHtml(m.nome)}</strong> • ${escapeHtml(m.dose || "")} • ${escapeHtml(m.horario || "")} ${m.ativo ? "" : "(inativo)"}`;
+        div.innerHTML = `
+          <strong>${escape(m.nome)}</strong> — ${escape(m.dose)} — ${escape(m.horario)}
+        `;
         medsEl.appendChild(div);
       });
 
       // sinais
       sinaisEl.innerHTML = "";
       (i.sinais_vitais || []).slice().reverse().forEach(s => {
-        const d = document.createElement("div");
-        d.className = "sinal-item";
-        d.innerHTML = `<small>${formatDateTime(s.data, s.hora)}</small>
-          <p>PA: ${s.pressao_sistolica}/${s.pressao_diastolica} — BPM: ${s.batimentos} — T: ${s.temperatura}°C</p>
-          <p>${escapeHtml(s.observacoes || "")}</p>`;
-        sinaisEl.appendChild(d);
+        const item = document.createElement("div");
+        item.className = "sinal-item";
+        item.innerHTML = `
+          <small>${formatDateTime(s.data)}</small>
+          <p>PA: ${s.pressao_sistolica}/${s.pressao_diastolica} — BPM: ${s.batimentos} — Temp: ${s.temperatura}°C</p>
+          <p>${escape(s.observacoes)}</p>
+        `;
+        sinaisEl.appendChild(item);
       });
 
-      // edit link
-      editarLink.href = `/pages/cadastroIdoso/cadastroIdoso.html?id=${id}`;
+      editarLink.href = `/pages/cadastroIdoso/cadastroIdoso.html?id=${i._id}`;
 
-    } catch (err) {
-      console.error(err);
+    } catch (e) {
+      console.error(e);
       alert("Erro ao carregar idoso.");
       window.location.href = "/pages/pacientes/pacientes.html";
     }
   }
 
   excluirBtn.addEventListener("click", async () => {
-    if (!confirm("Remover este idoso?")) return;
-    try {
-      await axios.delete(`/api/idosos/${id}`);
-      alert("Idoso removido.");
-      window.location.href = "/pages/pacientes/pacientes.html";
-    } catch (err) {
-      console.error(err);
-      alert(err.response?.data?.error || "Erro ao remover.");
-    }
+    if (!confirm("Deseja excluir este idoso?")) return;
+    await axios.delete(`/api/idosos/${id}`);
+    alert("Idoso removido.");
+    window.location.href = "/pages/pacientes/pacientes.html";
   });
 
   formSinal?.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // gather
     const fd = new FormData(formSinal);
     const novo = {
       data: new Date().toISOString(),
-      hora: new Date().toTimeString().split(" ")[0].slice(0,5),
-      pressao_sistolica: Number(fd.get("pressao_sistolica") || 0),
-      pressao_diastolica: Number(fd.get("pressao_diastolica") || 0),
-      batimentos: Number(fd.get("batimentos") || 0),
-      temperatura: Number(fd.get("temperatura") || 0),
-      observacoes: fd.get("observacoes") || ""
+      pressao_sistolica: fd.get("pressao_sistolica"),
+      pressao_diastolica: fd.get("pressao_diastolica"),
+      batimentos: fd.get("batimentos"),
+      temperatura: fd.get("temperatura"),
+      observacoes: fd.get("observacoes")
     };
 
-    try {
-      // fetch original, append, PUT back
-      const res = await axios.get(`/api/idosos/${id}`);
-      const i = res.data;
-      const sinais = i.sinais_vitais || [];
-      sinais.push(novo);
+    const res = await axios.get(`/api/idosos/${id}`);
+    const i = res.data;
 
-      await axios.put(`/api/idosos/${id}`, { sinais_vitais: sinais });
-      alert("Registro salvo.");
-      formSinal.reset();
-      load(); // recarrega lista
-    } catch (err) {
-      console.error(err);
-      alert("Erro ao salvar sinal.");
-    }
+    const sinais = i.sinais_vitais || [];
+    sinais.push(novo);
+
+    await axios.put(`/api/idosos/${id}`, { sinais_vitais: sinais });
+
+    formSinal.reset();
+    load();
   });
 
-  function escapeHtml(str) {
-    return String(str || "").replace(/[&<>"']/g, (m) => ({
-      "&": "&amp;","<": "&lt;",">": "&gt;",'"': "&quot;","'": "&#39;"
-    }[m]));
-  }
+  // troca de abas
+  document.querySelectorAll(".tab").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelector(".tab.active")?.classList.remove("active");
+      btn.classList.add("active");
 
-  function formatDate(d) {
-    if (!d) return "";
-    const dt = new Date(d);
-    return dt.toLocaleDateString();
-  }
-
-  function formatDateTime(d, h) {
-    if (!d) return h || "";
-    const dt = new Date(d);
-    return dt.toLocaleString() + (h ? " " + h : "");
-  }
+      document.querySelector(".tab-content.active")?.classList.remove("active");
+      document.getElementById(btn.dataset.tab).classList.add("active");
+    });
+  });
 
   load();
 });

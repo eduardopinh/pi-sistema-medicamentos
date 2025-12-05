@@ -1,32 +1,60 @@
-/* Ajustes específicos do perfil */
+/* --------------------------
+   LAYOUT BASE
+--------------------------- */
 
-/* FOTO DO PACIENTE */
-.patient-card {
+.main {
+  padding: 30px;
+}
+
+/* CARD PRINCIPAL DO IDOSO */
+.idoso-card {
   display: flex;
+  justify-content: space-between;
   align-items: center;
+  padding: 25px;
+  margin-bottom: 25px;
+}
+
+.idoso-card .left {
+  display: flex;
   gap: 20px;
+  align-items: center;
 }
 
-.patient-photo {
-  width: 100px;
-  height: 100px;
+.profile-photo {
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-/* ABAS */
+.idoso-card .info h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+/* --------------------------
+   ABAS
+--------------------------- */
+
 .tabs {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   margin-top: 25px;
   margin-bottom: 20px;
 }
 
 .tab {
-  background: transparent;
-  border: none;
   padding-bottom: 10px;
-  font-size: 15px;
+  font-size: 16px;
   cursor: pointer;
+  background: none;
+  border: none;
   color: var(--gray-500);
 }
 
@@ -35,30 +63,47 @@
   color: var(--primary);
 }
 
-/* GRID */
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 25px;
+.tab-content {
+  display: none;
 }
 
-/* ACORDEÕES */
-.accordion summary {
-  padding: 15px 0;
-  cursor: pointer;
-  border-bottom: 1px solid var(--gray-200);
-  font-weight: 500;
-}
-
-.accordion .doctor {
+.tab-content.active {
   display: block;
-  font-size: 12px;
-  color: var(--gray-500);
 }
 
-/* RESPONSIVIDADE */
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: 1fr;
+/* --------------------------
+   SEÇÕES
+--------------------------- */
+
+#idoso-contatos li {
+  padding: 8px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.condition-card {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.med-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.sinal-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+/* RESPONSIVO */
+@media (max-width: 850px) {
+  .idoso-card {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .left {
+    flex-direction: column;
   }
 }

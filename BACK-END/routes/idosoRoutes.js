@@ -1,22 +1,21 @@
-// BACK-END/routes/idosoRoutes.js
 const express = require("express");
 const router = express.Router();
 const controller = require("../controllers/idosoController");
-const upload = require("../middlewares/upload");
+const upload = require("../config/multerIdoso");
 
-// LISTAR
-router.get("/", controller.listar);
+// Criar idoso
+router.post("/", upload.single("foto"), controller.create);
 
-// BUSCAR
-router.get("/:id", controller.buscar);
+// Atualizar idoso
+router.put("/:id", upload.single("foto"), controller.update);
 
-// CRIAR COM FOTO
-router.post("/", upload.single("foto"), controller.criar);
+// Listar todos
+router.get("/", controller.getAll);
 
-// ATUALIZAR COM FOTO
-router.put("/:id", upload.single("foto"), controller.atualizar);
+// Buscar um idoso
+router.get("/:id", controller.getById);
 
-// DELETAR
-router.delete("/:id", controller.deletar);
+// Deletar
+router.delete("/:id", controller.delete);
 
 module.exports = router;

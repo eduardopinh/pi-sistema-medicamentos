@@ -23,8 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <button type="button" class="icon-btn remove-contact">✖</button>
     `;
 
-    row.querySelector(".remove-contact").addEventListener("click", () => row.remove());
-
+    // aplicar máscara ao input criado
     const telInput = row.querySelector(`input[name="contato_tel[]"]`);
     telInput.addEventListener("input", phoneMaskListener);
 
@@ -59,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <textarea class="input textarea" name="condicao_obs[]">${escapeHtml(condition.observacoes || "")}</textarea>
     `;
 
-    card.querySelector(".remove-condition").addEventListener("click", () => card.remove());
     return card;
   }
 
@@ -98,7 +96,22 @@ document.addEventListener("DOMContentLoaded", () => {
   addContactBtn?.addEventListener("click", () => contactsList.appendChild(createContactRow()));
   addConditionBtn?.addEventListener("click", () => conditionsList.appendChild(createConditionCard()));
 
-  // Aplicar máscara aos que já existem
+  // event delegation para remover contatos/condições (funciona para botões existentes e criados dinamicamente)
+  contactsList.addEventListener("click", (ev) => {
+    if (ev.target.matches(".remove-contact")) {
+      const row = ev.target.closest(".contact-row");
+      row?.remove();
+    }
+  });
+
+  conditionsList.addEventListener("click", (ev) => {
+    if (ev.target.matches(".remove-condition")) {
+      const card = ev.target.closest(".condition-card");
+      card?.remove();
+    }
+  });
+
+  // aplicar máscara em inputs já existentes (se houver)
   contactsList.querySelectorAll(`input[name="contato_tel[]"]`).forEach((i) => {
     i.addEventListener("input", phoneMaskListener);
   });
@@ -139,7 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
       (data.doencas || []).forEach((d) => {
         conditionsList.appendChild(
           createConditionCard({
-            diagnostico: d.diagnostico || "",
+            diagnostico: d.diagnostico || d.nome || "",
             data: d.data,
             medico: d.medico,
             observacoes: d.observacoes
@@ -218,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
     sendData.append("doencas", JSON.stringify(payload.doencas));
 
     // Se a foto foi selecionada:
-    if (fotoInput?.files.length > 0) {
+    if (fileInput?.files.length > 0) {
       sendData.append("foto", fileInput.files[0]);
     }
 
