@@ -26,12 +26,13 @@ const IdosoSchema = new mongoose.Schema(
 
     medicamentos: [
       {
-        nome: String,
-        dose: String,
-        horario: String,
+        medicamento_id: { type: mongoose.Schema.Types.ObjectId, ref: "Medicamento" },
+        instrucoes_especiais: String,
+        horarios: [String],
         ativo: { type: Boolean, default: true }
       }
     ],
+
 
     cuidadores: [
       {

@@ -1,34 +1,109 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Medicamentos</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar Medicamento</title>
 
-    <link rel="stylesheet" href="/public/css/global.css" />
-    <link rel="stylesheet" href="/public/css/medicamentos.css" />
-  </head>
+  <link rel="stylesheet" href="../../public/css/global.css" />
+  <link rel="stylesheet" href="../../public/css/cadastrarMedicamento.css" />
+</head>
 
-  <body>
-
-    <!-- SIDEBAR OPCIONAL... -->
-
-    <div class="med-page">
-      <h2 class="section-title">Medicamentos</h2>
-      <p class="section-subtitle">Lista de medicamentos em uso pelo paciente.</p>
-
-      <a href="/pages/cadastrarMedicamento/cadastrarMedicamento.html">Adicionar Medicamentos</a>
-
-      <div class="med-list">
-        <!-- Itens como no seu código -->
+<body>
+  <aside class="sidebar">
+    <div class="user-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-img" />
+      <div>
+        <strong id="sidebar-name"></strong>
+        <p id="sidebar-email"></p>
+        <a href="../perfil/perfil.html">Acessar Perfil</a>
       </div>
     </div>
 
-    <!-- SCRIPTS -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="../../public/js/api.js"></script>
-    <script src="../../public/js/auth.js"></script>
-    <script src="../../public/js/cadastrarMedicamento.js"></script>
+    <ul class="menu">
+      <li><a href="../painel/painel.html">Painel</a></li>
+      <li><a href="../medicamentos/medicamentos.html">Medicamentos</a></li>
+    </ul>
 
-  </body>
+    <div class="config-box">⚙️ Configurações</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <a href="../medicamentos/medicamentos.html" class="back-btn">←</a>
+      <h2 id="title">Registrar Medicamento</h2>
+    </header>
+
+    <form class="form-card" id="form-med">
+      <!-- IDENTIFICAÇÃO -->
+      <section class="section">
+        <h3>Identificação do Medicamento</h3>
+
+        <label class="label">Nome do medicamento</label>
+        <input class="input" name="nome" placeholder="Ex: Paracetamol 750mg" />
+
+        <label class="label">Classificação</label>
+        <div class="chips">
+          <button type="button" class="chip" data-value="Uso Contínuo">Uso Contínuo</button>
+          <button type="button" class="chip" data-value="Antibiótico">Antibiótico</button>
+          <button type="button" class="chip" data-value="Controle Especial">Controle Especial</button>
+        </div>
+
+        <input type="hidden" name="classificacao" id="classificacao" />
+      </section>
+
+      <!-- PRESCRIÇÃO -->
+      <section class="section">
+        <h3>Prescrição Médica</h3>
+
+        <label class="label">Médico prescriptor</label>
+        <input class="input" name="medico" placeholder="Ex: Dr. João da Silva" />
+
+        <label class="label">Especialidade médica</label>
+        <select class="input" name="especialidade">
+          <option value="">Selecione</option>
+          <option>Clínico Geral</option>
+          <option>Geriatra</option>
+          <option>Cardiologista</option>
+          <option>Endocrinologista</option>
+          <option>Pneumologista</option>
+        </select>
+      </section>
+        <label>Foto do Medicamento</label>
+        <input type="file" name="foto" id="foto" accept="image/*">
+
+
+      <!-- ADMINISTRAÇÃO -->
+      <section class="section">
+        <h3>Detalhes de Administração</h3>
+
+        <label class="label">Quantidade inicial em estoque</label>
+        <input class="input" name="estoque" type="number" placeholder="Ex: 30" />
+
+        <label class="label">Horários de administração</label>
+
+        <div id="horarios-list"></div>
+
+        <button type="button" id="add-horario" class="btn-secondary small">
+          + Adicionar horário
+        </button>
+
+        <label class="label">Instruções especiais</label>
+        <textarea class="input textarea" name="instrucoes" placeholder="Ex: Tomar 30 minutos antes das refeições"></textarea>
+      </section>
+
+      <!-- AÇÕES -->
+      <div class="form-actions">
+        <button type="button" class="btn-outline" onclick="history.back()">Cancelar</button>
+        <button type="submit" class="btn-primary">Salvar Medicamento</button>
+      </div>
+
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../../public/js/api.js"></script>
+  <script src="../../public/js/auth.js"></script>
+  <script src="../../public/js/cadastrarMedicamento.js"></script>
+</body>
 </html>

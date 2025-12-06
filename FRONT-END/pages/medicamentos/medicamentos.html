@@ -1,64 +1,52 @@
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="../../public/js/auth.js"></script>
-<script src="../../public/js/api.js"></script>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Medicamentos</title>
 
-<div class="med-page">
-  <h2 class="section-title">Medicamentos</h2>
-  <p class="section-subtitle">Lista de medicamentos em uso pelo paciente.</p>
+  <link rel="stylesheet" href="../../public/css/global.css" />
+  <link rel="stylesheet" href="../../public/css/medicamentos.css" />
+</head>
 
+<body>
 
-  <!-- Botão adicionar -->
-  <a href="../cadastrarMedicamento/cadastrarMedicamento.html"
-    >Adicionar Medicamentos</a
-  >
-
-  <div class="med-list">
-    <!-- ITEM 1 -->
-    <div class="med-item card">
-      <div class="med-header">
-        <h3>Losartana 50mg</h3>
-        <span class="tag tag-green">Ativo</span>
-      </div>
-
-      <p><strong>Posologia:</strong> 1 comprimido ao dia</p>
-      <p><strong>Horário:</strong> 08:00</p>
-
-      <div class="med-footer">
-        <button class="btn-outline-sm">Editar</button>
-        <button class="btn-danger-sm">Remover</button>
+  <aside class="sidebar">
+    <div class="user-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" class="user-img" />
+      <div>
+        <strong id="sidebar-name"></strong>
+        <p id="sidebar-email"></p>
+        <a href="../perfil/perfil.html">Acessar Perfil</a>
       </div>
     </div>
 
-    <!-- ITEM 2 -->
-    <div class="med-item card">
-      <div class="med-header">
-        <h3>Metformina 500mg</h3>
-        <span class="tag tag-green">Ativo</span>
-      </div>
+    <ul class="menu">
+      <li><a href="../painel/painel.html">Painel</a></li>
+      <li><a href="../pacientes/pacientes.html">Pacientes</a></li>
+      <li class="active"><a href="#">Medicamentos</a></li>
+    </ul>
 
-      <p><strong>Posologia:</strong> 2x ao dia</p>
-      <p><strong>Horários:</strong> 08:00 e 20:00</p>
+    <div class="config-box">⚙️ Configurações</div>
+  </aside>
 
-      <div class="med-footer">
-        <button class="btn-outline-sm">Editar</button>
-        <button class="btn-danger-sm">Remover</button>
-      </div>
-    </div>
+  <main class="main">
+    <header class="topbar">
+      <h2>Medicamentos</h2>
 
-    <!-- ITEM 3 -->
-    <div class="med-item card">
-      <div class="med-header">
-        <h3>Omeprazol 20mg</h3>
-        <span class="tag tag-gray">Suspenso</span>
-      </div>
+      <input type="text" id="search-med" class="search" placeholder="Buscar medicamento...">
 
-      <p><strong>Posologia:</strong> 1 cápsula em jejum</p>
-      <p><strong>Horário:</strong> 06:30</p>
+      <a class="btn-add" href="../cadastrarMedicamento/cadastrarMedicamento.html">
+        + Adicionar Medicamento
+      </a>
+    </header>
 
-      <div class="med-footer">
-        <button class="btn-outline-sm">Editar</button>
-        <button class="btn-danger-sm">Remover</button>
-      </div>
-    </div>
-  </div>
-</div>
+    <div class="cards" id="med-cards"></div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="../../public/js/api.js"></script>
+  <script src="../../public/js/auth.js"></script>
+  <script src="../../public/js/medicamentos.js"></script>
+</body>
+</html>

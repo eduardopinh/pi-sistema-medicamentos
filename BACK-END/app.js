@@ -16,6 +16,7 @@ connectDB();
 // -------------------------------------------
 const uploadsBase = path.join(__dirname, "uploads");
 const idososFolder = path.join(uploadsBase, "idosos");
+const medicamentoRoutes = require("./routes/medicamentoRoutes");
 
 if (!fs.existsSync(idososFolder)) {
   fs.mkdirSync(idososFolder, { recursive: true });
@@ -39,6 +40,7 @@ app.use(express.static(path.join(__dirname, "..", "FRONT-END")));
 // -------------------------------------------
 app.use("/api/admin", require("./routes/adminRoutes"));
 app.use("/api/idosos", require("./routes/idosoRoutes"));
+app.use("/api/medicamentos", medicamentoRoutes);
 
 // -------------------------------------------
 // ROTA RAIZ — abre index.html
