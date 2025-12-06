@@ -1,3 +1,4 @@
+// cadastrarMedicamento.js
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("form-med");
   const chips = document.querySelectorAll(".chip");
@@ -9,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const urlParams = new URLSearchParams(window.location.search);
   const editingId = urlParams.get("id");
 
-  // Seleção de Classificação
+  /* ----------------------------------------
+      SELEÇÃO DE CLASSIFICAÇÃO
+  ----------------------------------------- */
   chips.forEach(chip => {
     chip.addEventListener("click", () => {
       chips.forEach(c => c.classList.remove("active"));
@@ -18,7 +21,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Adicionar Horário
+  /* ----------------------------------------
+      FUNÇÃO PARA ADICIONAR LINHA DE HORÁRIO
+  ----------------------------------------- */
   function addHorarioRow(value = "") {
     const row = document.createElement("div");
     row.className = "horario-row";
@@ -34,13 +39,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   addHorarioBtn.addEventListener("click", () => addHorarioRow());
 
-  // Carregar Medicamento (edição)
+  /* ----------------------------------------
+      CARREGAR MEDICAMENTO PARA EDIÇÃO
+  ----------------------------------------- */
   async function loadMedicamento(id) {
     try {
       const res = await axios.get(`/api/medicamentos/${id}`);
       const m = res.data;
 
       document.getElementById("title").textContent = "Editar Medicamento";
+
       form.nome.value = m.nome;
       form.medico.value = m.medico;
       form.especialidade.value = m.especialidade;
@@ -62,9 +70,11 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (editingId) loadMedicamento(editingId);
-  else addHorarioRow();
+  else addHorarioRow(); // ao menos 1 campo padrão
 
-  // SUBMIT
+  /* ----------------------------------------
+      ENVIO DO FORMULÁRIO (POST / PUT)
+  ----------------------------------------- */
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -77,30 +87,29 @@ document.addEventListener("DOMContentLoaded", () => {
     fd.append("estoque", form.estoque.value);
     fd.append("instrucoes", form.instrucoes.value);
 
-    document.querySelectorAll("input[name='horarios[]']").forEach(h => {
-      fd.append("horarios[]", h.value);
-    });
+    // horários (array)
+    const horarios = [...document.querySelectorAll("input[name='horarios[]']")]
+                    .map(i => i.value)
+                    .filter(v => v);
 
-    // FOTO (opcional)
+    fd.append("horarios", JSON.stringify(horarios));
+
+    // foto (se enviada)
     if (fotoInput.files.length > 0) {
       fd.append("foto", fotoInput.files[0]);
     }
 
     try {
       if (editingId) {
-        // SE ESTÁ EDITANDO
         await axios.put(`/api/medicamentos/${editingId}`, fd, {
           headers: { "Content-Type": "multipart/form-data" }
         });
-
-        alert("Medicamento atualizado com sucesso.");
+        alert("Medicamento atualizado com sucesso!");
       } else {
-        // SE ESTÁ CRIANDO
         await axios.post("/api/medicamentos", fd, {
           headers: { "Content-Type": "multipart/form-data" }
         });
-
-        alert("Medicamento cadastrado!");
+        alert("Medicamento cadastrado com sucesso!");
       }
 
       window.location.href = "/pages/medicamentos/medicamentos.html";
